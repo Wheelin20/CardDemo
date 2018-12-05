@@ -36,7 +36,6 @@
                   android:id="@+id/item_detail"
                   android:layout_toEndOf="@id/item_image"
                   android:layout_toRightOf="@id/item_image"
-                  android:layout_alignParentTop="true"
                   android:layout_below="@id/item_title"
                   android:textSize="30sp"/>
 

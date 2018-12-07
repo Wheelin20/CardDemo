@@ -1,5 +1,6 @@
 package com.waldoms.carddemo
 
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,3 +12,8 @@ fun bindCardRecyclerAdapter(recyclerView: RecyclerView, adapter: CardRecyclerAda
     recyclerView.adapter = adapter
 }
 
+@BindingAdapter("setItemImage")
+fun bindItemImage(imageView:ImageView, imageId:Int)
+{
+    imageView.setImageResource(imageId)
+}

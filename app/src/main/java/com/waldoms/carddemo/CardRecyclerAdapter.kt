@@ -1,55 +1,46 @@
 package com.waldoms.carddemo
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.waldoms.carddemo.model.CardItem
-import com.waldoms.carddemo.model.CardItems
 
-class CardRecyclerAdapter : RecyclerView.Adapter<CardRecyclerAdapter.ViewHolder>()
+class CardRecyclerAdapter(val mViewModel: CardViewModel) : RecyclerView.Adapter<CardRecyclerAdapter.ViewHolder>()
 {
-    private val items:List<CardItem>
-
-    init {
-        val itemList:CardItems = CardItems()
-        itemList.fetchItems()
-        items = itemList.items
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardRecyclerAdapter.ViewHolder
     {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.card_layout, parent, false)
+        val layoutInflater = LayoutInflater.from(parent.context)
 
-        return ViewHolder(v)
+        val binding: ViewDataBinding = DataBindingUtil.inflate(layoutInflater, R.layout.card_layout, parent, false)
+
+        return ViewHolder(binding)
     }
 
     override fun getItemCount(): Int
     {
-        return items.size
+        return mViewModel.items.size
     }
 
     override fun onBindViewHolder(holder: CardRecyclerAdapter.ViewHolder, position: Int)
     {
-        val item:CardItem = items[position]
-        holder.itemTitle.text = item.itemTitle
-        holder.itemDetail.text = item.itemDetails
-        holder.itemImage.setImageResource(item.itemImage)
+        holder.bind(mViewModel, position)
     }
 
-    inner class ViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView)
+    inner class ViewHolder(binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
     {
-        var itemImage:ImageView
-        var itemTitle:TextView
-        var itemDetail:TextView
+        val binding: ViewDataBinding
 
         init
         {
-            itemImage = itemView.findViewById(R.id.item_image)
-            itemTitle = itemView.findViewById(R.id.item_title)
-            itemDetail = itemView.findViewById(R.id.item_detail)
+            this.binding = binding
+        }
+
+        fun bind(viewModel: CardViewModel, position: Int)
+        {
+            binding.setVariable(BR.viewModel, viewModel)
+            binding.setVariable(BR.position, position)
         }
     }
 }

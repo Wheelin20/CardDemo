@@ -1,5 +1,15 @@
 package com.waldoms.carddemo
 
-class CardViewModel
+import androidx.databinding.BindingAdapter
+import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.RecyclerView
+
+class CardViewModel : ViewModel()
 {
+    val adapter: CardRecyclerAdapter
+
+    init
+    {
+        adapter = CardRecyclerAdapter()
+    }
 }

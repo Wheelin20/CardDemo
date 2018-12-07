@@ -4,26 +4,29 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
+import com.waldoms.carddemo.databinding.ActivityCardDemoBinding
 
 import kotlinx.android.synthetic.main.activity_card_demo.*
 
 class CardDemoActivity : AppCompatActivity() {
-
-    private var layoutManager:RecyclerView.LayoutManager? = null
-    private var adapterCard: RecyclerView.Adapter<CardRecyclerAdapter.ViewHolder>? = null
+    private lateinit var mViewModel:CardViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card_demo)
+
+        setupBindings()
+
         setSupportActionBar(toolbar)
+    }
 
-        layoutManager = LinearLayoutManager(this)
-        recycler_view.layoutManager = layoutManager
-
-        adapterCard = CardRecyclerAdapter()
-        recycler_view.adapter = adapterCard
+    private fun setupBindings()
+    {
+        val binding:ActivityCardDemoBinding = DataBindingUtil.setContentView(this, R.layout.activity_card_demo)
+        mViewModel = ViewModelProviders.of(this).get(CardViewModel::class.java)
+        binding.viewModel = mViewModel
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

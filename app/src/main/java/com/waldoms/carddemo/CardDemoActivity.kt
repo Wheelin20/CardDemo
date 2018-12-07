@@ -6,14 +6,13 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 
 import kotlinx.android.synthetic.main.activity_card_demo.*
 
 class CardDemoActivity : AppCompatActivity() {
 
     private var layoutManager:RecyclerView.LayoutManager? = null
-    private var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
+    private var adapterCard: RecyclerView.Adapter<CardRecyclerAdapter.ViewHolder>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +22,8 @@ class CardDemoActivity : AppCompatActivity() {
         layoutManager = LinearLayoutManager(this)
         recycler_view.layoutManager = layoutManager
 
-        adapter = RecyclerAdapter()
-        recycler_view.adapter = adapter
+        adapterCard = CardRecyclerAdapter()
+        recycler_view.adapter = adapterCard
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
